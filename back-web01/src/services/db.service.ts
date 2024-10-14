@@ -15,6 +15,7 @@ export class DbService {
     myDbConn: mongoose.Connection;
     constructor() {
         this.myDbConn = mongoose.createConnection(dbConfig.dbUrl);
+        this.startAutoIncrement();
     } //constructor
 
     private startAutoIncrement() {
