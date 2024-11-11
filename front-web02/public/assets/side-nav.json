@@ -1,0 +1,114 @@
+[
+    {
+        "icon": "account_circle",
+        "name": "Devices",
+        "routerLink": "devices",
+        "isDisabled": false,
+        "isVisible": true
+    },
+    {
+        "icon": "add_shopping_cart",
+        "name": "Devices Type",
+        "routerLink": "devices-type",
+        "isDisabled": false,
+        "isVisible": true
+    },
+    {
+        "icon": "addchart",
+        "name": "Devices-group",
+        "routerLink": "devices-group",
+        "isDisabled": false,
+        "isVisible": true
+    },
+    {
+        "icon": "assignment_return",
+        "name": "Rules",
+        "routerLink": "rules",
+        "isDisabled": false,
+        "isVisible": true
+    },
+    {
+        "icon": "analytics",
+        "name": "OTA Updates",
+        "routerLink": "ota-updates",
+        "isDisabled": false,
+        "isVisible": true
+    },
+    {
+        "icon": "api",
+        "name": "Generate Keys",
+        "routerLink": "generate-keys",
+        "isDisabled": false,
+        "isVisible": true
+    },
+    {
+        "icon": "app_blocking",
+        "name": "Dashboard",
+        "routerLink": "dashboard",
+        "isDisabled": false,
+        "isVisible": true
+    },
+    {
+        "isGrouped": true,
+        "name": "Group 1 ",
+        "icon": "phone",
+        "children": [
+            {
+                "icon": "app_blocking",
+                "name": "Dashboard",
+                "routerLink": "dashboard",
+                "isDisabled": false,
+                "isVisible": true
+            },
+            {
+                "icon": "accessible_forward",
+                "name": "Members",
+                "routerLink": "members",
+                "isDisabled": false,
+                "isVisible": true
+            }
+        ]
+    },
+    {
+        "isGrouped": true,
+        "name": "Group 2",
+        "icon": "analytics",
+        "children": [
+            {
+                "icon": "account_circle",
+                "name": "dummy1",
+                "routerLink": "dummy1",
+                "isDisabled": false,
+                "isVisible": true
+            },
+            {
+                "icon": "add_shopping_cart",
+                "name": "dummy2",
+                "routerLink": "dummy2",
+                "isDisabled": false,
+                "isVisible": true
+            }
+        ]
+    },
+    {
+        "isGrouped": true,
+        "name": "Group 3",
+        "icon": "phone",
+        "children": [
+            {
+                "icon": "account_circle",
+                "name": "dummy1",
+                "routerLink": "dummy3",
+                "isDisabled": false,
+                "isVisible": true
+            },
+            {
+                "icon": "add_shopping_cart",
+                "name": "dummy2",
+                "routerLink": "dummy4",
+                "isDisabled": false,
+                "isVisible": true
+            }
+        ]
+    }
+]
