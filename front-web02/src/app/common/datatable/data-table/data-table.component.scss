@@ -1,0 +1,95 @@
+
+mat-icon {
+    cursor: pointer;
+  }
+  
+  .table {
+    width: 100%;
+  }
+  
+  .table-container {
+    margin: 1vh 1vw;
+    overflow: auto;
+    background-color: white;
+  
+    > * {
+      min-width: 813px;
+    }
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  button {
+    margin-right: 10px;
+  }
+  
+  .search {
+    margin: 0;
+  
+  }
+  
+  .bar {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    padding: 0 16px;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+  }
+  
+  .pointer {
+    cursor: pointer;
+  }
+  
+  table td {
+    vertical-align: inherit;
+    border-top: inherit;
+  }
+  
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #591fc1;
+  }
+  
+  .showOnHover {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  
+  .action-hover {
+    &:hover {
+      .showOnHover {
+        opacity: 1;
+      }
+    }
+  }
+  .disabled-row{
+    background-color: lightgray;
+    pointer-events: none;
+    .showOnDisabled{
+      pointer-events: auto;
+      mat-icon{
+        color: unset;
+      }
+    }
+    mat-icon{
+      color: grey;
+    }
+  }
+  

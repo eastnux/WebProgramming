@@ -1,0 +1,64 @@
+
+i {
+    border-radius: 100%;
+    padding: 15px;
+    justify-content: center;
+  }
+  
+  .card {
+    h6 {
+      color: #65366f
+    }
+  
+    .value {
+      color: #979098
+    }
+  
+    .date {
+      color: #cfc9d2
+    }
+  
+    border-left: 5px solid #dfd6b3;
+    margin-left: 5px;
+    margin: 8px;
+    margin-top: 15px;
+    height: 100px;
+    width: 185px;
+    padding: 8px;
+    background-color: #f1ecf3;
+  }
+  
+  .mat-slide-toggle {
+    margin-right: 15px;
+  }
+  
+  ::ng-deep.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #0f7a41;
+  }
+  
+  ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: white;
+  }
+  
+  
+  ::ng-deep .mat-button .mat-button-focus-overlay {
+    background-color: transparent;
+  }
+  
+  
+  button:focus {
+    outline: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  ::ng-deep .mat-tab-label-active {
+    color: darkblue;
+  }
+  
+  fa-icon {
+    border-radius: 100%;
+    padding: 15px;
+    justify-content: center;
+  }
+  

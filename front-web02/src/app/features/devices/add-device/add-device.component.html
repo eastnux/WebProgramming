@@ -1,0 +1,89 @@
+
+<div class="body">
+    <h3>{{ title }}</h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb pl-0" style="background-color: transparent;">
+        <li class="breadcrumb-item"><a routerLink="..">Devices</a></li>
+        <li aria-current="page" class="breadcrumb-item active">Add Devices</li>
+      </ol>
+    </nav>
+    <form #myForm="ngForm" (ngSubmit)="onSubmit()" [formGroup]="addDeviceForm" novalidate>
+      <div class="form-row ">
+        <div class="form-group col-md-6">
+          <mat-label for="deviceType">Device Type</mat-label>
+          <br>
+          <mat-form-field appearance="outline" class="w-75" >
+            <mat-select formControlName="deviceType" id="inputState">
+              @for(item of deviceTypes; track item){
+                <mat-option [value]="item">{{item}}</mat-option>
+              }
+              
+            </mat-select>
+            <mat-error>Device Type is required</mat-error>
+          </mat-form-field>
+  
+        </div>
+        <div class="form-group col-md-6">
+          <mat-label for="deviceName">Name</mat-label>
+          <mat-form-field appearance="outline" class="w-75">
+            <input formControlName="deviceName" matInput type="text"/>
+            <mat-error>Name is required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="d-block ">Authentication Type</label>
+          <mat-button-toggle-group class="types border-0"  formControlName="certificate">
+            <mat-button-toggle class="m-2 rounded" value="false" >
+              Access Token
+            </mat-button-toggle>
+            <mat-button-toggle class="m-2 rounded" value="true">
+              Certificate
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+          <!-- <mat-error style="font-size:x-small" *ngIf="
+          addDeviceForm.get('certificate').hasError('required') &&
+          (addDeviceForm.get('certificate').touched ||showError)" >Authentication Type is required</mat-error> -->
+  
+  
+      </div>
+      <div class="form-row mb-3 ">
+        <div class="col-md-6">
+          <mat-label for="staticMetadata">Static Metadata</mat-label>
+          <br>
+          <mat-form-field appearance="outline" class="w-75">
+            <input formControlName="staticD" matInput type="text"/>
+            <mat-error>Static MetaData is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+      <div class="form-row mb-3 ">
+        <div class="col-md-6">
+          <div class="custom-control custom-checkbox">
+            <input #input (click)="showHide(input)" class="custom-control-input" id="customCheck1" type="checkbox">
+            <label class="custom-control-label" for="customCheck1">Dynamic Metadata</label>
+          </div>
+          <div id="textarea" style="display:none">
+            <mat-form-field appearance="outline" class="w-75">
+              <input formControlName="dynamicD" matInput type="text"/>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row mt-3">
+        <div class="col-4">
+          <button class="btn btn-lg btn-light" routerLink=".." style="background-color: #d5d4d4;" type="button">
+            Back
+          </button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-primary buttonColor btn-lg pr-5 pl-5" type="submit">
+            Add Device
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

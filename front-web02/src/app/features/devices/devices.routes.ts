@@ -1,6 +1,8 @@
 import { Routes } from "@angular/router";
 import { DevicesComponent } from "./device-base-page/devices.component";
+import { AddDeviceComponent } from "./add-device/add-device.component";
+
 export const routes: Routes = [
-{path: '', component: DevicesComponent, }, //나중에 pathMatch = 'full' 추가
-// {path: 'add-device', component: AddDeviceComponent},
-];
+    {path: '', component: DevicesComponent, pathMatch: 'full'},
+    {path: 'add-device', component: AddDeviceComponent},
+  ];

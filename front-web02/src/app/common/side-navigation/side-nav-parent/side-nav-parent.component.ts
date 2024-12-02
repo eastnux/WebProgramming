@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { GroupedNavItem, NavItem } from '../models/side-nav.models';
 import { SideNavigationService } from '../../../core/services/side-navigation.service';
-import { NavItem, GroupedNavItem } from '../models/side-nav-models';
+import { SideNavComponent } from '../side-nav/side-nav.component';
 
 @Component({
   selector: 'app-side-nav-parent',
   standalone: true,
-  imports: [RouterOutlet], //RouterOutlet 추가했음
+  imports: [SideNavComponent],
   templateUrl: './side-nav-parent.component.html',
-  styleUrls: ['./side-nav-parent.component.scss']
+  styleUrl: './side-nav-parent.component.scss'
 })
-export class SideNavParentComponent implements OnInit {
+export class SideNavParentComponent {
+  heading: string = "IoT board";
+  showLogoutBtn: boolean = true;
+  navItems: (NavItem & GroupedNavItem)[] = [];
 
-  constructor(private sideNavService: SideNavigationService) { }
-  navItems: (NavItem | GroupedNavItem)[] = []; // navItems 선언
+  constructor(private sideNavService: SideNavigationService) {}
+
   ngOnInit() {
-    this.sideNavService.getNavItems().subscribe(
-      items => this.navItems = items,
-      error => console.error('Error loading nav items', error)
-    );
+    this.sideNavService.getNavItems().subscribe(data => this.navItems = data);
   }
+
 }

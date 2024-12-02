@@ -1,1 +1,78 @@
-<p>devices works!</p>
+<div>
+  <h3>DEVICES</h3>
+  <button mat-raised-button routerLink="add-device"> Add Device </button>
+</div>
+<app-data-table [data]="data" [columnNames]="['ID','Type', 'Name(User Defined)', ' Created Date']"
+  [keys]="['_id', 'type', 'name', 'createdAt']" [config]="dataTableConfig" 
+  [actions]="dataTableActions" actionsHeaderName="View Device Data" 
+  (actionClick)="actionChange($event)" (bulkActionClick)="actionChange($event)"
+  (filterChange)="filterChange($event)" (page)="pageChange($event)">
+</app-data-table>
+
+<!--Pop up Model-->
+<ng-template #userDialogTemplate>
+  <div class="container-fluid ">
+    <mat-toolbar class="m-0 p-0" style="background: #fff;height: 40px;">
+      <!-- <i class="fa-solid fa-user-chef"></i>
+      <i aria-hidden="true" style="color: rgb(82,45,91);" class="fa {{popUpData.title.icon}} fa-lg float-left"></i> -->
+      <fa-icon icon="user"></fa-icon>
+      {{ popUpData.title.name }}
+      <span class="flex-spacer"></span>
+      @if(popUpData.config.dismissbtn){
+      <button mat-button mat-dialog-close class="fa fa-times pointer" disableRipple=true
+        style="margin-top:30px; margin-left: 50%; margin-bottom: 25px;">OK</button>
+      }
+    </mat-toolbar>
+    <mat-tab-group>
+      <mat-tab label="ATTRIBUTES">
+        <div class="attributeBody">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="d-flex flex-row flex-wrap" style=" width: 100%; margin:0 auto ;">
+                <app-my-card (MoveBackward)="moveBackward()" (MoveForward)="moveForward()" [cardData]="cardData"
+                  [setting]="setting" [showDefaultContent]="true" class="main w-100">
+                  <div class="Custom_Data">
+                    <h1 style="color: darkmagenta; font-weight: 500;"> Custom data 1</h1>
+                    <p>this para</p>
+                  </div>
+                </app-my-card>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="attributeFooter">
+          <!-- <mat-form-field> -->
+          <mat-label>Access Key</mat-label>
+          <input #input [type]="show ? 'text' : 'password'" matInput />
+          <!-- </mat-form-field> -->
+          &nbsp;
+          <button (click)="accessKeyShow()" [disabled]="input.value.length==0" class="float-none" color="warn"
+            mat-raised-button>
+            {{ show == false ? "SHOW" : "HIDE" }}
+          </button>
+        </div>
+      </mat-tab>
+      <mat-tab label="ACTIONS">
+        <mat-list>
+          @for(item of popUpData.tabs.actions; track item; let i=$index){
+          <div [ngStyle]="{ backgroundColor: item.toggle ? '#effff4' : 'white' }">
+            <mat-slide-toggle (click)="slideToggleFunction(i)" class="float-right mt-2"
+              color="green"></mat-slide-toggle>
+            <i [ngStyle]="{
+                      backgroundColor: item.toggle ? '#c8fee1' : 'white'
+                    }" aria-hidden="true" class="fa {{ item.icon }} fa-lg float-left"></i>
+            <mat-list-item class="float-none">{{ item.value }}</mat-list-item>
+            <span class="flex-spacer"></span>
+
+            <mat-divider></mat-divider>
+          </div>
+          }
+
+        </mat-list>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+</ng-template>

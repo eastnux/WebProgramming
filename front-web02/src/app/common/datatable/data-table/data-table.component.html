@@ -1,0 +1,101 @@
+<div class="table-container mat-elevation-z8">
+  <!--  Top actions bar-->
+  <div class="bar">
+    @if( selection.selected.length>0){
+      <!-- @if(config.checkbox && selection.selected.length>0){ -->
+
+    <div class="ml-auto">
+      @for(bulkAction of actions.bulkActions; track bulkAction){
+      <button (click)="bulkActionHandler('bulk-action',bulkAction.name)" [color]="bulkAction.color" mat-stroked-button>
+        <mat-icon>{{bulkAction.icon}}</mat-icon>
+        {{bulkAction.name | titlecase}}
+      </button>
+      }
+    </div>
+    }
+
+    <!--    Search Box-->
+    <!-- <mat-form-field *ngIf="config.searchBox" class="search"> to do //// -->
+      <div class="search">
+        <!-- <div *ngIf="config.searchBox" class="search"> -->
+          <mat-label>Search</mat-label>
+      <label>
+        <input (keyup)="filter($event)" matInput>
+      </label>
+      <mat-icon matSuffix>search</mat-icon>
+    </div>
+    <!-- </mat-form-field> to do //// -->
+  </div>
+  <!--  <ng-template #loader>-->
+  <!--  </ng-template>-->
+  <!--  <div *ngIf="!data" class="row justify-content-center align-items-center w-100">-->
+  <!--    <mat-spinner></mat-spinner>-->
+  <!--  </div>-->
+  <table [dataSource]="dataSource" class="table" mat-table matSort>
+    <!--    Columns-->
+    <ng-container matColumnDef="checkbox">
+      <th *matHeaderCellDef mat-header-cell>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td *matCellDef="let row" mat-cell>
+        <mat-checkbox (change)="$event ? selection.toggle(row) : null" (click)="$event.stopPropagation()"
+          [checked]="selection.isSelected(row)" color="primary">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container *ngFor="let key of keys;let i=index" [matColumnDef]="key">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> {{columnNames[i]}}</th>
+      <td *matCellDef="let row" mat-cell>{{row[key] || row[key].deviceType}} </td>
+    </ng-container>
+
+    <!--    <ng-container *ngIf="columnNames[1]" matColumnDef="type">-->
+    <!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{columnNames[1]}}</th>-->
+    <!--      <td mat-cell *matCellDef="let row"> {{row.type}}</td>-->
+    <!--    </ng-container>-->
+
+    <!--    <ng-container *ngIf="columnNames[2]" matColumnDef="name">-->
+    <!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{columnNames[2]}}</th>-->
+    <!--      <td mat-cell *matCellDef="let row"> {{row.name}} </td>-->
+    <!--    </ng-container>-->
+
+    <!--    <ng-container *ngIf="columnNames[3]" matColumnDef="createdDate">-->
+    <!--      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{columnNames[3]}}</th>-->
+    <!--      <td mat-cell *matCellDef="let row">-->
+    <!--        <ng-container *ngIf="assertType(row) as row">-->
+    <!--          {{row.createdDate | date:'medium'}}-->
+    <!--        </ng-container>-->
+    <!--      </td>-->
+    <!--    </ng-container>-->
+    <!--device data-->
+    <ng-container matColumnDef="options">
+      <th *matHeaderCellDef mat-header-cell>{{actionsHeaderName}}</th>
+      <td *matCellDef="let row" mat-cell>
+        <div class="d-flex justify-content-around ">
+          
+          @for(action of actions.actions;track action){
+          <button [ngClass]="{'showOnHover':action.showOnHover,'showOnDisabled':action.showOnDisabled}"
+            (click)="rowAction(row,'action',action.name);$event.stopPropagation()" mat-icon-button>
+            <mat-icon [color]="action.color">{{action.iconOpp ? (row.operations?.deviceStatus ? action.icon :
+              action.iconOpp) : action.icon}}</mat-icon>
+          </button>
+          }
+        </div>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="checkBox.concat(keys).concat(actionKey)" mat-header-row></tr>
+
+    <tr [ngClass]="{'disabled-row':row.operations?!row.operations.deviceStatus:false}"
+      (click)="this.selection.toggle(row)" *matRowDef="let row; columns: checkBox.concat(keys).concat(actionKey)"
+      class="pointer action-hover" mat-row></tr>
+
+    <tr *matNoDataRow class="mat-row">
+      <td class="mat-cell" colspan="4">No data Available</td>
+    </tr>
+  </table>
+  <mat-paginator [length]="config.totalCount" (page)="pageEvent($event)" [pageSizeOptions]="this.config.pageSizeOptions"
+    [pageSize]="config.pageSize" [showFirstLastButtons]="true" color="primary"></mat-paginator>
+</div>

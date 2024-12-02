@@ -1,2 +1,35 @@
-<h1>{{ title }}</h1>
-<p>Welcome to your dashboard!</p>
+<gridster *ngIf="dashboard" #dashboardGrid [options]="options" class="gridster">
+    <gridster-item [item]="widgetItem.widgetConfig"
+                   *ngFor="let widgetItem of dashboard.widgets" class="dashboard-widget">
+      <div class="top-bar">
+        <span class="title">{{widgetItem.label}}</span>
+        <span class="flex-fill"></span>
+        <div class=" justify-content-around">
+          <button mat-icon-button (click)="openSettings(widgetItem);$event.stopPropagation()">
+            <mat-icon color="primary">settings</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon color="accent">edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="removeItem($event, widgetItem)">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div (mousedown)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()" class="p-2">
+        <!--         [ngSwitch]="widgetItem.lib.lib"-->
+        <!--    >-->
+        <ng-template [widget]="widgetItem" appLibHost></ng-template>
+        <!--      <div class="w-100" *ngSwitchCase="'chartjs'">-->
+        <!--        <app-chartjs class="d-block" [widget]="widgetItem"></app-chartjs>-->
+        <!--      </div>-->
+        <!--      <div class=" w-100" *ngSwitchCase="'chartist'">-->
+        <!--        <app-chartist class="d-block" [widget]="widgetItem"></app-chartist>-->
+        <!--      </div>-->
+        <!--      <div *ngSwitchCase="'google'">-->
+        <!--        <app-google-charts [widget]="widgetItem"></app-google-charts>-->
+        <!--      </div>-->
+      </div>
+    </gridster-item>
+  </gridster>
+  

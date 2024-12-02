@@ -1,0 +1,85 @@
+[
+  {
+    "label": "Gauge Chart",
+    "value": "gauge",
+    "componentPath": "guage-form/guage-form.component",
+    "lib": [
+      {
+        "lib": "google",
+        "componentPath": "google-charts/google-charts.component"
+      }
+    ]
+  },
+  {
+    "label": "Line Chart",
+    "value": "line",
+    "componentPath": "line-form/line-form.component",
+    "lib": [
+      {
+        "lib": "chartjs",
+        "componentPath": "chartjs/chartjs.component"
+      },
+      {
+        "lib": "google",
+        "componentPath": "google-charts/google-charts.component"
+      },
+      {
+        "lib": "chartist",
+        "componentPath": "chartist/chartist.component"
+      }
+    ]
+  },
+  {
+    "label": "Bar Chart",
+    "value": "bar",
+    "componentPath": "guage-form/guage-form.component",
+    "lib": [
+      {
+        "lib": "chartjs",
+        "componentPath": "chartjs/chartjs.component"
+      },
+      {
+        "lib": "google",
+        "componentPath": "google-charts/google-charts.component"
+      },
+      {
+        "lib": "chartist",
+        "componentPath": "chartist/chartist.component"
+      },
+      {
+        "lib": "D3",
+        "componentPath": "d3-charts/d3-charts.component"
+      }
+    ]
+  },
+  {
+    "label": "Pie Chart",
+    "value": "pie",
+    "componentPath": "guage-form/guage-form.component",
+    "lib": [
+      {
+        "lib": "chartjs",
+        "componentPath": "chartjs/chartjs.component"
+      },
+      {
+        "lib": "google",
+        "componentPath": "google-charts/google-charts.component"
+      },
+      {
+        "lib": "chartist",
+        "componentPath": "chartist/chartist.component"
+      }
+    ]
+  },
+  {
+    "label": "Area Chart",
+    "value": "area",
+    "componentPath": "guage-form/guage-form.component",
+    "lib": [
+      {
+        "lib": "D3",
+        "componentPath": "d3-charts/d3-charts.component"
+      }
+    ]
+  }
+]

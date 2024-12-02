@@ -1,0 +1,63 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,900);
+
+$dark: #292929;
+$light: #efefef;
+$red: #D91E18;
+$green: #2ECC71;
+$blue: #4183D7;
+$font-stack: "Lato", sans-serif;
+$small: 40em;
+
+.body {
+  padding: 30px;
+
+  h1 {
+    color: #5a3863;
+  }
+
+  .col-md-6 {
+    justify-content: space-between;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+    padding: 0.6em 0 !important;
+  }
+
+  .buttonColor {
+    background-color: #fb7b6b;
+  }
+
+  .mat-spinner {
+    z-index: 900;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+
+  .container {
+    height: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+  }
+}
+
+.types {
+  ::ng-deep .mat-button-toggle-checked {
+    background-color: #4A75FA;
+    color: white !important;
+  }
+}
+
+::ng-deep .mat-button-toggle-label-content {
+  line-height: 36px !important;
+}

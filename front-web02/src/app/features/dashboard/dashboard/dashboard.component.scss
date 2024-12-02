@@ -1,0 +1,23 @@
+.dashboard-widget {
+    background-color: white;
+    border-radius: 10px 10px 0 0;
+    border: 1px solid;;
+  }
+  
+  .gridster {
+    height: 100%;
+    background-color: inherit;
+  }
+  
+  .top-bar {
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+    background-color: lightgray;
+  
+    .title {
+      font-size: 1rem;
+    }
+  }
+  

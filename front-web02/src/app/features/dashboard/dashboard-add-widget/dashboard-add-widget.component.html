@@ -1,0 +1,163 @@
+<div class="pl-3 pr-3">
+    <h1 *ngIf="selectedDashboard">{{selectedDashboard}}</h1>
+    <nav class="mb-0">
+      <ol class="breadcrumb pl-0" style="background-color: transparent;">
+        <li class="breadcrumb-item"><a routerLink="..">DASHBOARD</a></li>
+        <li class="breadcrumb-item active">Add New Widget</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="w-100 pl-3 pr-3">
+    <mat-vertical-stepper #stepper (selectionChange)="selectionChange($event)" [disableRipple]="true" linear
+                          style="background-color: inherit">
+      <mat-step #widget [editable]="false" [stepControl]="selectWidgetForm">
+        <ng-template matStepLabel> Select Widget
+          <button (click)="stepper.selectedIndex==1&&stepper.previous();widgetStep.editable=true"
+                  *ngIf="stepper.selectedIndex==1"
+                  class="rounded-circle bg-white m-2"
+                  mat-icon-button>
+            <i aria-hidden="true" class="fa fa-pencil-square-o" style="color: black!important;"></i>
+          </button>
+          <div *ngIf="stepper.selectedIndex!=0" class="row w-100">
+            <div class="col-6">
+              <label>Label: </label>
+              {{selectWidgetForm.value.label}}
+            </div>
+            <div class="col-6">
+              <label>Widget: </label>
+              {{selectWidgetForm.value.component}}
+            </div>
+          </div>
+        </ng-template>
+        <form [formGroup]="selectWidgetForm">
+          <div class="row">
+            <div class="col-6">
+              <label class="d-block m-0">Label</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input formControlName="label" matInput placeholder="Ex:Temperature">
+                <mat-error>Label Required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <label class="d-block m-0">Widget</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-select [matMenuTriggerFor]="mainMenu" #widgetSelector>
+                </mat-select>
+                <!--              <button matSuffix mat-icon-button [matMenuTriggerFor]="mainMenu">-->
+                <!--                <mat-icon>arrow_drop_down</mat-icon>-->
+                <!--              </button>-->
+              </mat-form-field>
+              <mat-menu #mainMenu="matMenu">
+                <ng-container *ngFor="let item of widgets">
+                  <button (click)="menuSelected(item)" mat-menu-item *ngIf="!item.lib">{{item.label}}</button>
+                  <button mat-menu-item *ngIf="item.lib" [matMenuTriggerFor]="lib_menu">{{ item.label }}</button>
+                  <mat-menu #lib_menu="matMenu">
+                    <button (click)="menuSelected(item,lib)" *ngFor="let lib of item.lib"
+                            mat-menu-item>
+                      <mat-icon matPrefix>preview</mat-icon>
+                      <span>{{ lib.lib }}</span>
+                    </button>
+  
+                  </mat-menu>
+                </ng-container>
+              </mat-menu>
+              <!--            <mat-form-field appearance="outline" class=" w-100">-->
+              <!--              <mat-select (selectionChange)="componentChange($event)" formControlName="component"-->
+              <!--                          placeholder="Ex: Bar Chart">-->
+              <!--                <mat-option *ngFor="let w of libs" [value]="w">-->
+              <!--                  {{w.label}}-->
+              <!--                </mat-option>-->
+              <!--                <mat-optgroup *ngFor="let group of libs" [label]="group.label">-->
+              <!--                  <mat-option *ngFor="let pokemon of [1,2,3,4]" [value]="pokemon">-->
+              <!--                    {{pokemon}}-->
+              <!--                  </mat-option>-->
+              <!--                </mat-optgroup>-->
+              <!--              </mat-select>-->
+              <!--              <mat-error>Field Required</mat-error>-->
+              <!--            </mat-form-field>-->
+            </div>
+          </div>
+          <!--        <div class="mt-2 mb-2" *ngIf="!selectWidgetForm.value.component">-->
+          <!--          <label class="d-block">Recently Used</label>-->
+          <!--          <div class="d-flex justify-content-start">-->
+          <!--            <button color="primary" class="ml-2" (click)="selectComponent(d)" mat-stroked-button-->
+          <!--                    *ngFor="let d of libs">{{d.label}}</button>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <div *ngIf="selectedIndex===0">
+            <button [disabled]="!selectWidgetForm.valid" class="mr-3 btn-clr" color="primary"
+                    mat-raised-button matStepperNext>NEXT
+            </button>
+            <button mat-button routerLink=".."> Cancel</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="attributesForm" editable="false">
+        <ng-template matStepLabel>Set Attributes</ng-template>
+        <div>
+          <form (ngSubmit)="submit()" [formGroup]="attributesForm" class="mt-4 w-100">
+            <div class="row">
+              <div class="col-6">
+                <label class="d-block">Device Type</label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-select formControlName="deviceType">
+                    <mat-option (onSelectionChange)="deviceChange(type)" [value]="type.type.deviceType"
+                                *ngFor="let type of devices">
+                      {{type.type.deviceType}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>Required Field</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <label class="d-block">Device</label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <input formControlName="deviceName" type="text" matInput>
+                  <mat-error>Required Field</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label class="d-block">Attribute</label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <input formControlName="attributes" type="text" matInput>
+                  <mat-error>Required Field</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <label class="d-block">Unit</label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <input formControlName="dataUnit" type="text" matInput>
+                  <mat-error>Required Field</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <ng-template customFormHost></ng-template>
+            <!--          <div *ngIf="selectWidgetForm.value.component==='gauge'" class="row">-->
+            <!--            <div class="col-6">-->
+            <!--              <label class="d-block">Minimum</label>-->
+            <!--              <mat-form-field class="w-100" appearance="outline">-->
+            <!--                <input formControlName="min" type="text" matInput>-->
+            <!--              </mat-form-field>-->
+            <!--            </div>-->
+            <!--            <div class="col-6">-->
+            <!--              <label class="d-block">Maximum</label>-->
+            <!--              <mat-form-field class="w-100" appearance="outline">-->
+            <!--                <input formControlName="max" type="text" matInput>-->
+            <!--              </mat-form-field>-->
+            <!--            </div>-->
+            <!--          </div>-->
+            <div class="d-flex justify-content-center position-relative align-items-center mt-2">
+              <button [disabled]="attributesForm.invalid||customForm.invalid" (click)="submit()" class="btn submit-btn"
+                      mat-button
+                      type="submit">ADD WIDGET
+              </button>
+              <button type="button" class="position-absolute" mat-button routerLink=".." style="left: 0">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
+  

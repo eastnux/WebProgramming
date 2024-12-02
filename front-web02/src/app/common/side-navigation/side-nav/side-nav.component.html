@@ -1,0 +1,63 @@
+<div class="fx-row-spacebetween">
+    <div>
+        <mat-icon class="hamburger_icon" (click)="toggleSideNav()">menu</mat-icon>
+    </div>
+    @if(showLogoutBtn){
+        <div >
+            <p class="side-nav-logout-btn"><mat-icon class="logout_icon">power_settings_new</mat-icon>&nbsp;&nbsp;Logout</p>
+        </div>
+    }
+
+</div>
+<mat-sidenav-container class="my-sidenav-container">
+    <mat-sidenav class="side-nav" #side_nav [opened]="isSideNavOpened">
+
+        <mat-list>
+            @if(showHeading){
+            <h4 class="side-nav-heading">{{heading}}</h4>
+            }@else{
+            <h2 class="side-nav-heading"></h2>
+            }
+            <div class="fx-column-start">
+                @for(navItem of navItems;track navItem;let i = $index){
+                @if(navItem.isGrouped){
+                <mat-expansion-panel #expansionPanel (opened)="closeAllExpansionPanelsExcept(i)"
+                    (click)="toggleSideNav()">
+                    <mat-expansion-panel-header class="side-nav-item">
+                        <mat-icon class="nav-item-icon">{{navItem.icon}}</mat-icon>&nbsp;&nbsp;
+                        <span>{{navItem.name}}</span>
+                        <span class="nav-active-pointer"></span>
+                    </mat-expansion-panel-header>
+                    @for(child of navItem.children; track child){
+                    @if(child.isVisible){
+                    <mat-list-item style="height: 40px !important; padding-left: 15px;">
+                        <p style="font-size: 13px" class="side-nav-item" [routerLink]="child.routerLink"
+                            routerLinkActive="grouped-nav-item-active" #rla="routerLinkActive">
+                            <mat-icon class="nav-item-icon">{{child.icon}}</mat-icon>&nbsp;&nbsp;
+                            <span>{{child.name}}</span>
+                        </p>
+                    </mat-list-item>
+                    }
+                    }
+                </mat-expansion-panel>
+                }
+                @else{
+                @if(navItem.isVisible){
+                <mat-list-item style="height: 40px !important" (click)="toggleSideNav()">
+                    <p class="side-nav-item" [routerLink]=navItem.routerLink routerLinkActive="active"
+                        (click)="closeAllExpansionPanels()">
+                        <mat-icon class="nav-item-icon">{{navItem.icon}}</mat-icon>&nbsp;&nbsp;
+                        <span>{{navItem.name}}</span>
+                       </p>
+                </mat-list-item>
+                }
+                }
+                }
+            </div>
+        </mat-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="side-nav-content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
